@@ -18,7 +18,8 @@
     "./styles.css": "./styles.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "tailwind.css"
   ],
   "scripts": {
     "build": "tsx ../../scripts/build.ts"
