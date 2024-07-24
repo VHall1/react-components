@@ -1,44 +1,78 @@
-import * as esbuild from "esbuild";
 import { execa } from "execa";
+import { glob } from "glob";
 import { cpSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { rollup, type Plugin, type RollupOptions } from "rollup";
+import esbuild from "rollup-plugin-esbuild";
+
+// import alias from "@rollup/plugin-alias";
+// const aliases = [
+// 	{
+// 		find: new RegExp(`^@victorhalldev/react`),
+// 		replacement: resolve("..", "react", "src"),
+// 	},
+// ];
 
 async function build() {
-	const path = process.cwd();
-	const name = "packageJson.name";
+	const cwd = process.cwd();
+	const packageJsonPath = resolve(cwd, "package.json");
+	const packageJsonFileUrl = pathToFileURL(packageJsonPath).href;
+	const packageJson = await import(packageJsonFileUrl);
+	const name: string = packageJson.name;
 
-	const entry = join(path, "index.ts");
-	const dist = join(path, "dist");
-	const config: Parameters<typeof esbuild.build>[0] = {
-		entryPoints: [entry],
-		bundle: true,
-		sourcemap: true,
-		format: "cjs",
-		target: "es2022",
-		outdir: dist,
+	const plugins: Plugin[] = [
+		esbuild({
+			sourceMap: true,
+			tsconfig: resolve(cwd, "tsconfig.json"),
+			platform: "browser",
+		}),
+	];
+	const deps = [...Object.keys(packageJson.dependencies ?? {}), ...Object.keys(packageJson.peerDependencies ?? {})];
+	const external = deps.length ? new RegExp(`^(${deps.join("|")})`) : undefined;
+	const entries = await glob("src/**/*.{ts,tsx}");
+	const outputs: RollupOptions["output"] = [
+		{
+			format: "es",
+			exports: "named",
+			entryFileNames: "[name].mjs",
+			dir: resolve(cwd, "dist", "esm"),
+			preserveModules: true,
+		},
+		{
+			format: "cjs",
+			exports: "named",
+			entryFileNames: "[name].cjs",
+			dir: resolve(cwd, "dist", "cjs"),
+			preserveModules: true,
+		},
+	];
+	const config: RollupOptions = {
+		input: entries,
+		output: outputs,
+		external,
+		plugins,
 	};
 
-	console.log(`Building ${join(dist, "index.js")}`);
-	await esbuild.build(config);
+	console.log(`[${name}] Building...`);
 
-	console.log(`Building ${join(dist, "index.mjs")}`);
-	await esbuild.build({
-		...config,
-		format: "esm",
-		outExtension: { ".js": ".mjs" },
-	});
+	const build = await rollup(config);
+	await Promise.all(outputs.map((output) => build.write(output)));
 
-	console.log(`Building ${join(dist, "index.d.ts")}`);
+	console.log(`[${name}][JS] Generated CJS and ESM files ✅`);
+
 	await execa("pnpm", ["tsc", "--project", "tsconfig.build.json"], {
-		cwd: path,
+		cwd,
 		stdio: "inherit",
 	});
 
 	try {
-		cpSync(join(dist, "types", "index.d.ts"), join(dist, "types", "index.d.mts"));
+		cpSync(join(cwd, "dist", "types", "index.d.ts"), join(cwd, "dist", "types", "index.d.mts"));
 	} catch {
 		console.log("No .dts file found");
 	}
+
+	console.log(`[${name}][DTS] Generated type definitions ✅`);
 }
 
 build().catch((err) => {

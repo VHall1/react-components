@@ -1,9 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "compilerOptions": {
-    "paths": {
-      "@vhall1/react/*": ["./*"]
-    }
-  }
+	"extends": "../../tsconfig.json",
+	"include": ["**/*.ts", "**/*.tsx"],
+	"compilerOptions": {
+		"paths": {
+			"@victorhalldev/react/*": ["./src/*"]
+		}
+	}
 }

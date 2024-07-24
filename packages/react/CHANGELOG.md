@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.0.2
+
+### Patch Changes
+
+- updated build script
+
 ## 1.0.1
 
 ### Patch Changes

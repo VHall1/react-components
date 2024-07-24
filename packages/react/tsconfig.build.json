@@ -1,13 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "compilerOptions": {
-    "noEmit": false,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "outDir": "dist/types",
-    "paths": {
-      "@vhall1/react/*": ["./*"]
-    }
-  }
+	"extends": "../../tsconfig.json",
+	"include": ["src"],
+	"compilerOptions": {
+		"noEmit": false,
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"outDir": "dist/types"
+	}
 }
