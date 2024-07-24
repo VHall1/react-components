@@ -15,9 +15,17 @@
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "exports": {
-    "./theme.css": "./theme.css",
-    "./styles.css": "./theme.css",
-    "./tailwind.css": "./theme.css"
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./theme.css": "./theme.css"
   },
   "files": [
     "dist",
