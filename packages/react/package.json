@@ -15,11 +15,13 @@
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "exports": {
-    "./styles.css": "./styles.css"
+    "./theme.css": "./theme.css",
+    "./styles.css": "./theme.css",
+    "./tailwind.css": "./theme.css"
   },
   "files": [
     "dist",
-    "tailwind.css"
+    "theme.css"
   ],
   "scripts": {
     "build": "tsx ../../scripts/build.ts"
