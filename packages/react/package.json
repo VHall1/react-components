@@ -1,8 +1,14 @@
 {
-  "name": "@vhall1/react",
+  "name": "@victorhalldev/react",
   "version": "1.0.0",
   "type": "module",
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsx ../../scripts/build.ts"
   },
