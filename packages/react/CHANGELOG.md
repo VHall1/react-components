@@ -1,5 +1,15 @@
 # @victorhalldev/react
 
+## 1.1.0
+
+### Minor Changes
+
+- 18e63ab: remove redundant css exports
+
+### Patch Changes
+
+- 18e63ab: add missing exports
+
 ## 1.0.6
 
 ### Patch Changes
