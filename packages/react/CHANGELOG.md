@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.0.4
+
+### Patch Changes
+
+- ccc9228: include default theme in bundle
+
 ## 1.0.3
 
 ### Patch Changes
