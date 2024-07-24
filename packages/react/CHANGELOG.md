@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.0.5
+
+### Patch Changes
+
+- fc2c2eb: update package.json metadata
+
 ## 1.0.4
 
 ### Patch Changes
