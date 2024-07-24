@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.0.6
+
+### Patch Changes
+
+- b60ef7e: fix theme filename typo
+
 ## 1.0.5
 
 ### Patch Changes
