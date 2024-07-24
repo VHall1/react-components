@@ -1,0 +1,19 @@
+{
+  "name": "@vhall1/react",
+  "version": "1.0.0",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": "^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
+    "react-dom": "^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.4.0"
+  }
+}
