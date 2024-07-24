@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.0.3
+
+### Patch Changes
+
+- f38a0a1: fix package.json entrypoints
+
 ## 1.0.2
 
 ### Patch Changes
