@@ -16,6 +16,8 @@ import esbuild from "rollup-plugin-esbuild";
 
 async function build() {
 	const cwd = process.cwd();
+	const flags = process.argv.slice(2);
+	const tailwind = flags.includes("--tw");
 	const packageJsonPath = resolve(cwd, "package.json");
 	const packageJsonFileUrl = pathToFileURL(packageJsonPath).href;
 	const packageJson = await import(packageJsonFileUrl);
@@ -60,6 +62,14 @@ async function build() {
 	await Promise.all(outputs.map((output) => build.write(output)));
 
 	console.log(`[${name}][JS] Generated CJS and ESM files ✅`);
+
+	if (tailwind) {
+		await execa("pnpm", ["tailwindcss", "-i", "theme.css", "-o", join("dist", "theme.css")], {
+			cwd,
+			// stdio: "inherit",
+		});
+		console.log(`[${name}][JS] Generated Tailwind classes ✅`);
+	}
 
 	await execa("pnpm", ["tsc", "--project", "tsconfig.build.json"], {
 		cwd,

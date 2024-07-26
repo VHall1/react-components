@@ -25,11 +25,10 @@
         "default": "./dist/cjs/index.cjs"
       }
     },
-    "./theme.css": "./theme.css"
+    "./theme.css": "./dist/theme.css"
   },
   "files": [
-    "dist",
-    "theme.css"
+    "dist"
   ],
   "scripts": {
     "build": "tsx ../../scripts/build.ts"
