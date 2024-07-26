@@ -1,5 +1,12 @@
 # @victorhalldev/react
 
+## 1.2.0
+
+### Minor Changes
+
+- 75155b3: added Card component
+- 6606832: added Sheet component
+
 ## 1.1.0
 
 ### Minor Changes
