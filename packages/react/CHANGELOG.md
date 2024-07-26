@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.2.2
+
+### Patch Changes
+
+- 128fcf5: fix: actually build tailwind classes used by components
+
 ## 1.2.1
 
 ### Patch Changes
