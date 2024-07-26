@@ -1,5 +1,11 @@
 # @victorhalldev/react
 
+## 1.2.1
+
+### Patch Changes
+
+- 20d8ae7: include tailwind build on dist for better styles purging
+
 ## 1.2.0
 
 ### Minor Changes
